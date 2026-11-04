@@ -1,0 +1,15 @@
+services:
+  db:
+    extends:
+      file: docker-compose.yml
+      service: db
+
+  app:
+    image: assignment-07:latest
+    init: true
+    ports:
+      - 8080:8080
+    environment:
+      DB_CONNECTION_STRING: postgres://postgres:postgres@db:5432/module06demo
+    depends_on:
+      - db
